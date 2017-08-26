@@ -4,7 +4,8 @@
 	$youxiang = $_POST['youxiang'];
 
 	if ($username && $passwd && $youxiang) {
-		$db = new mysqli('127.0.0.1', 'linux011', 'ikm-098', 'linux011');
+		//$db = new mysqli('127.0.0.1', 'linux011', 'ikm-098', 'linux011');
+		$db = new mysqli('127.0.0.1', 'root', 'huo04ying11xia', 'linux011');
 		$db->query("set character set 'utf8'");//读库
 
 		$sql = "SELECT * FROM zhang_hao WHERE zhang_hao = '" . $username. "'";

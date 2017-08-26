@@ -20,7 +20,7 @@
             <tr>
                 <td height=50></td>
                 <td height=50><input type="submit" value="登录"></td>
-                <td height=50><a href="zhuce.html">注册</a></td>
+                <td height=50><a href="register.html">注册</a></td>
             </tr>
         </table>
     </form>
