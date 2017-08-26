@@ -4,27 +4,69 @@
 	<meta charset="UTF-8" />
 	<title>无惑开源之linux0.11</title>
 	<link href="css.css" type="text/css" rel="stylesheet"/>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		function submit() {
+			if($("#username").val() == "") {
+				alert("请输入帐号！");
+				return;
+			}
+
+			if($("#password").val() == "") {
+				alert("请输入密码！");
+				return;
+			}
+
+			if($("#email").val() == "") {
+				alert("请输入邮箱！");
+				return;
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: 'register.php',
+				data: {
+					username: $("#username").val(),
+					password: $("#password").val(),
+					email: $("#email").val()
+				},
+				success: function(data, status) {
+					alert(data.message);
+					if(data.result == 0)
+					{
+						window.location.href = "login.php";
+					}
+
+				},
+				dataType: 'json'
+			});
+		}
+	</script>
 </head>
 <body>
 	<h2>linux0.11</h2><hr/>
- 	<form  action="zhuce.php" method="post">
-       <table align="center">
-            <tr>
-                <td height=35>账号:</td>
-                <td height=35><input type="text" name="username" ></td>
-            </tr>
-            <tr>
-                <td height=35>密码:</td>
-                <td height=35><input type="password"  name="passwd"></td>
-            </tr>
-            <tr>
-                <td height=35>邮箱:</td>
-                <td height=35><input type="text" name="youxiang" ></td>
-            </tr>
-            <tr>
-                <td colspan=2 align="center" height=50><input type="submit" value="注册"></td>
-            </tr>
-        </table>
-    </form>
+	<table align="center">
+		<tr>
+			<td height=35>账号:</td>
+			<td height=35>
+				<input id="username" type="text">
+			</td>
+		</tr>
+		<tr>
+			<td height=35>密码:</td>
+			<td height=35>
+				<input id="password" type="password">
+			</td>
+		</tr>
+		<tr>
+			<td height=35>邮箱:</td>
+			<td height=35>
+				<input id="email" type="text">
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center" height=50><button onclick="submit()">注册</button></td>
+		</tr>
+	</table>
 </body>
 </html>
