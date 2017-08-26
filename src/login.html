@@ -4,25 +4,67 @@
 	<meta charset="UTF-8" />
 	<title>无惑开源之linux0.11</title>
 	<link href="css/css.css" type="text/css" rel="stylesheet"/>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		function submit() {
+			if($("#username").val() == "") {
+				alert("请输入帐号！");
+				return;
+			}
+
+			if($("#password").val() == "") {
+				alert("请输入密码！");
+				return;
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: 'login.php',
+				data: {
+					username: $("#username").val(),
+					password: $("#password").val(),
+				},
+				success: function(data, status) {
+					alert(data.message);
+					if(data.result == 0)
+					{
+						window.location.href = "index.php";
+					}
+					else
+					{
+						window.location.reload();
+					}
+				},
+				dataType: 'json'
+			});
+		}
+	</script>
+
 </head>
 <body>
 	<h2>linux0.11</h2><hr/>
-	<form  name="myform" action="login.php" method="get" onSubmit="return check();">
-        <table align="center">
-            <tr>
-                <td height=35>账号:</td>
-                <td height=35><input type="text" name="username" ></td>
-            </tr>
-            <tr>
-                <td height=35>密码:</td>
-                <td height=35><input type="password"  name="passwd"></td>
-            </tr>
-            <tr>
-                <td height=50></td>
-                <td height=50><input type="submit" value="登录"></td>
-                <td height=50><a href="register.html">注册</a></td>
-            </tr>
-        </table>
-    </form>
+	<table align="center">
+		<tr>
+			<td height=35>账号:</td>
+			<td height=35>
+				<input id="username" type="text"/>
+			</td>
+		</tr>
+		<tr>
+			<td height=35>密码:</td>
+			<td height=35>
+				<input id="password" type="password"/>
+			</td>
+		</tr>
+		<tr>
+			<td height=50></td>
+			<td height=50>
+				<button onclick="submit();">登录</button>
+			</td>
+			<td height=50>
+				<a href="register.html">注册</a>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
