@@ -11,6 +11,10 @@ function Chuli_wenjian(){
     sed -i '' 's/ *$//' $1 2>> log_warning
 # 删除空行
     sed -i '' '/^ *$/d' $1 2>> log_warning
+# 处理字符'\'、'''、'<'
+    sed -i '' 's/\\/\\\\/'g $1 2>> log_warning
+    sed -i '' "s/\'/\\\'/"g $1 2>> log_warning
+    sed -i '' 's/</\&lt/'g $1 2>> log_warning
 # 将所有的函数导出到同一个文件
     sed -n '/^[a-z].*[a-z|*]$/,/^}/p' $1 > $2  2>> log_warning
 # 将所有的数据结构导出到同一个文件
@@ -57,7 +61,7 @@ function Create_SQL(){
 
     ifs=$IFS
     IFS=
-    while read line
+    while read -r line
     do
 # 为函数的代码和数据结构的字段创建SQL语句
         echo "INSERT INTO dai_ma SET han_shu = $num_hanshu, xu_hao = $num_line, zhu_shi = 0, wen_ti = 0, nei_rong = '$line', shi_jian = now(), gl_1 = 0, shj_ch = now();" >> $3
